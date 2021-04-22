@@ -1,5 +1,6 @@
 <?php
-    include "php/config.php"
+    include "php/config.php";
+    $new_url= "url" ;
     if(isset($_GET)){
         foreach($_GET as $key => $val){
             $u = mysqli_real_escape_string($conn, $key);
