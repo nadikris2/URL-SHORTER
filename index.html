@@ -84,10 +84,33 @@
                             <?php
                             if(strlen($row)['full_url']) > 60{
                                 echo substr($row['full_url'],0,60) . '...';
-                                
+
+                            }else {
+                                echo $row['full_url'];
                             }
+                            ?>
+                        </li>
+                        <li>
+                            <?php echo $row['clicks'] ?>
+                        </li>
+                        <li>
+                            <li><a href="php/delete.php?id=<?php echo $row['shorten_url'] ?>">Delete</a></li>
                         </li>
                     </div>
+                    <?php
+                }
+                ?>
             </div>
+                <?php
+            }
+        ?>
+        </div>
+
+        <div class= "blur-effect"></div>
+        <div class ="popup-box">
+        <div class="info-box">Ini Link Pendek Anda </div>
+        <form action = "#" autocomplete="off">
+            <label>Edit Link Pendek anda</label>
+        </form>
         </div>
     </body>
