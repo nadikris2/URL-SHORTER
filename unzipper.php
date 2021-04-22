@@ -6,8 +6,8 @@ $GLOBALS['status']=array();
 
 $unzipper = new Unzipper;
 if(isset($_POST['dounzip'])){
-    $archive= isset($_POST['zipfile']) ? 
-    $destination = isset($_POST['extpath']) ? 
+    $archive= isset($_POST['zipfile']) ? strip_tags($_POST['zipfile']) : '';
+    $destination = isset($_POST['extpath']) ? strip_tags($_POST['extpath']) : '';
     $unzipper -> prepareExtraction($archive,$destination)
 }
 
@@ -27,7 +27,7 @@ class Unzipper{
     public function __construct(){
         if($dh = opendir($this ->localdir))
         while (($file = readdir($dh)) !== False){
-            if (pathinfo($file , PATHINFO_EXTENSION))=== 'zip'
+            if (pathinfo($file , PATHINFO_EXTENSION))=== 'zip' 
             || pathinfo($file, PATHINFO_EXTENSION) === 'gz'
             || pathinfo($file, PATHINFO_EXTENSION) === 'rar'
         } { this ->zipfiles[] = $file ; 
