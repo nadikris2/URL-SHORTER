@@ -235,3 +235,34 @@ class Unzipper{
   </style>
 </head>
 <body>
+<p class="status status--<?php echo strtoupper(key($GLOBALS['status'])); ?>">
+  Status: <?php echo reset($GLOBALS['status']); ?><br/>
+  <span class="small">Processing Time: <?php echo $time; ?> seconds</span>
+</p>
+<form action="" method="POST">
+  <fieldset>
+    <h1>Archive Unzipper</h1>
+    <label for="zipfile">Select .zip or .rar archive or .gz file you want to extract:</label>
+    <select name="zipfile" size="1" class="select">
+      <?php foreach ($unzipper->zipfiles as $zip) {
+        echo "<option>$zip</option>";
+      }
+      ?>
+    </select>
+    <label for="extpath">Extraction path (optional):</label>
+    <input type="text" name="extpath" class="form-field" />
+    <p class="info">Enter extraction path without leading or trailing slashes (e.g. "mypath"). If left empty current directory will be used.</p>
+    <input type="submit" name="dounzip" class="submit" value="Unzip Archive"/>
+  </fieldset>
+
+  <fieldset>
+    <h1>Archive Zipper</h1>
+    <label for="zippath">Path that should be zipped (optional):</label>
+    <input type="text" name="zippath" class="form-field" />
+    <p class="info">Enter path to be zipped without leading or trailing slashes (e.g. "zippath"). If left empty current directory will be used.</p>
+    <input type="submit" name="dozip" class="submit" value="Zip Archive"/>
+  </fieldset>
+</form>
+<p class="version">Unzipper version: <?php echo VERSION; ?></p>
+</body>
+</html>
