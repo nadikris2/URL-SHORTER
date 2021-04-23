@@ -2,7 +2,7 @@
     $domain="localhost/url/";
     $hostname="localhost";
     $username ="root"
-    $password="14maret2012";
+    $password="";
     $db="url";
 
 
