@@ -1,8 +1,12 @@
 <?php
-    $domain="localhost/url/";
-    $hostname="localhost";
-    $username ="root"
-    $password="";
-    $db="url";
+    $conn=mysqli_connect("localhost","root","","urlshortener");
+    if($conn){
+        echo "Database connected";
+    }
+    else {
+        echo "Failed";
+    }
+
+?>
 
 
