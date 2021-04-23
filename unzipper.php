@@ -59,3 +59,21 @@ class Unzipper{
     }
     gzclose($gzipped);
     fclose($file);
+    if (file_exists($destination . '/' . $filename)) {
+        $GLOBALS['status'] = array('success' => 'File unzipped successfully.');
+  
+       
+        if (pathinfo($destination . '/' . $filename, PATHINFO_EXTENSION) == 'tar') {
+          $phar = new PharData($destination . '/' . $filename);
+          if ($phar->extractTo($destination)) {
+            $GLOBALS['status'] = array('success' => 'Extracted tar.gz archive successfully.');
+   
+            unlink($destination . '/' . $filename);
+          }
+        }
+      }
+      else {
+        $GLOBALS['status'] = array('error' => 'Error unzipping file.');
+      }
+  
+    }
