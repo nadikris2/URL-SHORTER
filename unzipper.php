@@ -104,3 +104,45 @@ class Unzipper{
       }
     
     }
+
+    class Zipper {
+
+        private static function folderToZip($folder, &$zipFile, $exclusiveLength) {
+            $handle = opendir($folder);
+        
+            while (FALSE !== $f = readdir($handle)) {
+              if ($f != '.' && $f != '..' && $f != basename(__FILE__)) {
+                $filePath = "$folder/$f";
+                $localPath = substr($filePath, $exclusiveLength);
+        
+                if (is_file($filePath)) {
+                  $zipFile->addFile($filePath, $localPath);
+                }
+                elseif (is_dir($filePath)) {
+                  $zipFile->addEmptyDir($localPath);
+                  self::folderToZip($filePath, $zipFile, $exclusiveLength);
+                }
+              }
+            }
+            closedir($handle);
+          }
+          public static function zipDir($sourcePath, $outZipPath) {
+            $pathInfo = pathinfo($sourcePath);
+            $parentPath = $pathInfo['dirname'];
+            $dirName = $pathInfo['basename'];
+        
+            $z = new ZipArchive();
+            $z->open($outZipPath, ZipArchive::CREATE);
+            $z->addEmptyDir($dirName);
+            if ($sourcePath == $dirName) {
+              self::folderToZip($sourcePath, $z, 0);
+            }
+            else {
+              self::folderToZip($sourcePath, $z, strlen("$parentPath/"));
+            }
+            $z->close();
+        
+            $GLOBALS['status'] = array('success' => 'Successfully created archive ' . $outZipPath);
+          }
+        }
+        ?>
