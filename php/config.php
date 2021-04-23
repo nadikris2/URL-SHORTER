@@ -1,8 +1,8 @@
 <?php
     $domain="localhost/url/";
-    $host="localhost";
-    $user ="root"
-    $password=" ";
+    $hostname="localhost";
+    $username ="root"
+    $password="14maret2012";
     $db="url";
 
 
