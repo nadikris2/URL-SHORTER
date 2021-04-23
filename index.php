@@ -82,8 +82,8 @@
                         </li>
                         <li>
                             <?php
-                            if(strlen($row)['full_url']) > 60{
-                                echo substr($row['full_url'],0,60) . '...';
+                                if(strlen($row)['full_url']) > 60{
+                                echo substr($row['full_url'], 0 , 60) . '...';
 
                             }else {
                                 echo $row['full_url'];

@@ -42,3 +42,20 @@ class Unzipper{
     else {
         $GLOBALS['status'] = array('info' => 'No .zip or .gz or rar files found. So only zipping functionality available.');
 }
+
+  public static function extractGzipFile($archive, $destination) {
+
+    if (!function_exists('gzopen')) {
+      $GLOBALS['status'] = array('error' => 'Error: Your PHP has no zlib support enabled.');
+      return;
+    }
+
+    $filename = pathinfo($archive, PATHINFO_FILENAME);
+    $gzipped = gzopen($archive, "rb");
+    $file = fopen($destination . '/' . $filename, "w");
+
+    while ($string = gzread($gzipped, 4096)) {
+      fwrite($file, $string, strlen($string));
+    }
+    gzclose($gzipped);
+    fclose($file);
