@@ -18,11 +18,12 @@
 ?>
 
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>URL Shortener </title>
   <link rel="stylesheet" href="style.css">
+  <!-- Iconsout Link for Icons -->
   <link rel="stylesheet" href="https://unicons.iconscout.com/release/v3.0.6/css/line.css">
 </head>
 <body>
@@ -83,7 +84,7 @@
                 </li> 
               </li>
                 <li><?php echo $row['clicks'] ?></li>
-              
+                <li><a href="php/delete.php?id=<?php echo $row['shorten_url'] ?>">Delete</a></li>
               </div>
               <?php
             }
