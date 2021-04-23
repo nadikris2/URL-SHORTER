@@ -77,3 +77,30 @@ class Unzipper{
       }
   
     }
+    public static function extractRarArchive($archive, $destination) {
+        // Check if webserver supports unzipping.
+        if (!class_exists('RarArchive')) {
+          $GLOBALS['status'] = array('error' => 'Error: Your PHP version does not support .rar archive functionality. <a class="info" href="http://php.net/manual/en/rar.installation.php" target="_blank">How to install RarArchive</a>');
+          return;
+        }
+
+        if ($rar = RarArchive::open($archive)) {
+
+          if (is_writeable($destination . '/')) {
+            $entries = $rar->getEntries();
+            foreach ($entries as $entry) {
+              $entry->extract($destination);
+            }
+            $rar->close();
+            $GLOBALS['status'] = array('success' => 'Files extracted successfully.');
+          }
+          else {
+            $GLOBALS['status'] = array('error' => 'Error: Directory not writeable by webserver.');
+          }
+        }
+        else {
+          $GLOBALS['status'] = array('error' => 'Error: Cannot read .rar archive.');
+        }
+      }
+    
+    }
